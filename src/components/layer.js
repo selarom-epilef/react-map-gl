@@ -45,7 +45,7 @@ const propTypes = {
 
 /* eslint-disable complexity, max-statements */
 function diffLayerStyles(map, id, props, prevProps) {
-  const {layout = {}, paint = {}, filter, minzoom, maxzoom, beforeId, ...otherProps} = props;
+  const {layout = {}, paint = {}, filter, minzoom, maxzoom, beforeId} = props;
 
   if (beforeId !== prevProps.beforeId) {
     map.moveLayer(id, beforeId);
@@ -81,11 +81,6 @@ function diffLayerStyles(map, id, props, prevProps) {
   }
   if (minzoom !== prevProps.minzoom || maxzoom !== prevProps.maxzoom) {
     map.setLayerZoomRange(id, minzoom, maxzoom);
-  }
-  for (const key in otherProps) {
-    if (!deepEqual(otherProps[key], prevProps[key])) {
-      map.setLayerProperty(id, key, otherProps[key]);
-    }
   }
 }
 
